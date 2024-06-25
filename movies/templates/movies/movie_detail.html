@@ -1,0 +1,22 @@
+{% extends "movies/base.html" %}
+
+{% block title %}
+    <h1>{{ movie.title }}</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="maincontentdetail">
+        <div class="img">
+            {% if movie.poster %}
+                <img src="{{ movie.poster.url }}" alt="{{ movie.title }} poster" width="400">
+            {% endif %}
+        </div>
+        <div class="details">
+            <p class="direc"><strong>Director:</strong> {{ movie.director }}</p>
+            <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
+            <p><strong>Genre:</strong> {{ movie.genre }}</p>
+            <p class="desc"><strong>Description:</strong> {{ movie.description }}</p>
+            <a class='back' href="{% url 'home' %}"><i class="fa-solid fa-arrow-right-to-bracket"></i>&nbsp;Back to List</a>
+        </div>
+    </div>
+{% endblock %}

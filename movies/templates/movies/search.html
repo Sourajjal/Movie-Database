@@ -1,0 +1,40 @@
+{% extends "movies/base.html" %}
+
+{% block title %}
+    <h1>Found {{ movie_count }} movie{{ movie_count|pluralize }} for "{{ query }}"</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="maincontenthome">
+        <ul style="list-style: none;">
+            {% if movies %}
+                {% for movie in movies %}
+                    <li>
+                        <div class="card mb-3" style="max-width: 540px;">
+                            <div class="row g-0">
+                            <div class="col-md-4">
+                                {% if movie.poster %}
+                                    <img src="{{ movie.poster.url }}" class="img-fluid rounded-start" alt="{{ movie.title }} poster">
+                                {% endif %}
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                <a href="{% url 'movie_detail' movie.id %}"><h5 class="card-title">{{ movie.title }}</h5></a>
+                                <p class="card-text"><strong>Director:</strong> {{ movie.director }}</p>
+                                <p class="card-text"><strong>Release Date:</strong> {{ movie.release_date }}</p>
+                                <p class="card-text"><strong>Genre:</strong> {{ movie.genre }}</p>
+                                <p class="card-text"><small class="text-body-secondary">Last updated {{time_upload}} mins ago</small></p>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+                <a class='back' href="{% url 'home' %}"><i class="fa-solid fa-arrow-right-to-bracket"></i>&nbsp;Back to List</a>
+            {% else %}
+                <h3>No movies found</h3>
+                <a class='back' href="{% url 'home' %}"><i class="fa-solid fa-arrow-right-to-bracket"></i>&nbsp;Back to List</a>
+            {% endif %}
+        </ul>
+    </div>
+{% endblock %}
